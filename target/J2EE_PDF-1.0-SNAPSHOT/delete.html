@@ -21,27 +21,27 @@ and open the template in the editor.
                     <br>
                     <div class="row">
                         <div class="text-center col-12">
-                            <h1>Fusion de PDF</h1>
+                            <h1>Supprimer une page</h1>
                         </div>
                     </div>
                     <br>
                     <br>
                     <div class='row'>
                         <div class='offset-4 col-4'>
-                        <form action='?'  method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="inputFile1">PDF 1</label>
-                                <input type="file" class="form-control" id="inputFile1" required name='file1' accept="application/pdf">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="inputFile2">PDF 2</label>
-                                <input type="file" class="form-control" id="inputFile2" required name='file2' accept="application/pdf">
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-success">Fusionner</button>
+                            <form action='?'  method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="inputFile1">PDF</label>
+                                    <input type="file" class="form-control" id="inputFile1" required name='file1' accept="application/pdf">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="number">PDF 2</label>
+                                    <input type="number" class="form-control" id="number" required name='number' min='0'>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-success">Fusionner</button>
 
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
