@@ -21,7 +21,7 @@ and open the template in the editor.
                     <br>
                     <div class="row">
                         <div class="text-center col-12">
-                            <h1>Supprimer une page</h1>
+                            <h1>Conversion d'une image en PDF</h1>
                         </div>
                     </div>
                     <br>
@@ -30,16 +30,11 @@ and open the template in the editor.
                         <div class='offset-4 col-4'>
                             <form action='?'  method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="inputFile1">PDF</label>
-                                    <input type="file" class="form-control" id="inputFile1" required name='file1' accept="application/pdf">
+                                    <label for="inputFile1">Image</label>
+                                    <input type="file" class="form-control" id="inputFile1" required name='file1' accept="image/x-png,image/gif,image/jpeg">
                                 </div>
                                 <br>
-                                <div class="form-group">
-                                    <label for="number">PDF 2</label>
-                                    <input type="number" class="form-control" id="number" required name='number' min='0'>
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-success">Supprimer</button>
+                                <button type="submit" class="btn btn-success">Convertir</button>
 
                             </form>
                         </div>
