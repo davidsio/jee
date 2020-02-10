@@ -34,12 +34,12 @@ and open the template in the editor.
                             <h:form enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="inputFile1">PDF 1</label>
-                                    <p:fileUpload value="#{PDF.reader}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                    <p:fileUpload value="#{PDF.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
                                 <div class="form-group">
                                     <label for="inputFile2">PDF 2</label>
-                                    <p:fileUpload value="#{PDF.reader2}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                    <p:fileUpload value="#{PDF.file2}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
                                 <p:commandButton value="Fusionner (DBZ / Goten - Trunks)" ajax="false" action="#{PDF.merge}" class="btn btn-success" disabled="false" />    
