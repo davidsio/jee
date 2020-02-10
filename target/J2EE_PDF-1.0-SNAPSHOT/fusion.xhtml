@@ -42,8 +42,7 @@ and open the template in the editor.
                                     <p:fileUpload value="#{PDF.reader2}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
-                                <button type="submit" action='#{PDF.merge}' class="btn btn-success">Fusionner</button>
-
+                                <p:commandButton value="Fusionner (DBZ / Goten - Trunks)" ajax="false" action="#{PDF.merge}" class="btn btn-success" disabled="false" />    
                             </h:form>   
                         </div>
                     </div>
