@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -37,8 +39,7 @@ and open the template in the editor.
                                     <p:fileUpload value="#{fileUploadView.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
-                                <button type="submit" class="btn btn-success">Convertir</button>
-
+                                <p:commandButton value="Convertir" class="btn btn-success" ajax="false" action="#{fileUploadView.upload}" disabled="false" />
                             </h:form>
                         </div>
                     </div>
