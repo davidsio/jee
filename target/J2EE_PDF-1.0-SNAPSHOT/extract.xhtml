@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>JEE is dead</title>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous"></link>
+    </h:head>
+    <h:body>
+        <div class="container">
+
+            <div class="row">
+                <div class="text-center col-12">
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="text-center col-12">
+                            <h1>Extraction d'une page</h1>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class='row'>
+                        <div class='offset-4 col-4'>
+                            <h:form enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="inputFile1">PDF : </label>
+                                    <p:fileUpload value="#{fileUploadView.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label for="number">Numéro de la page : </label>
+                                    <br />
+                                    <p:inputNumber type="number" id="number" value='' required='' minValue="0" ></p:inputNumber>
+                                </div>
+                                <br />
+                                <button type="submit" class="btn btn-success">Extraire</button>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    </h:body>
+</html>
