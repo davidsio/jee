@@ -32,13 +32,31 @@ import org.primefaces.model.UploadedFile;
 @SessionScoped
 public class PDF implements Serializable {
 
-    String dest = "C:/Users/Hp/Documents/TP_PDF/test.pdf";
-//    PdfWriter writer;
+    String DEST = "C:\\Users\\Hp\\Documents\\NetBeansProjects\\J2EE_PDF\\src\\main\\webapp\\ressources\\uploads\\monpdf.pdf";
+ 
     private PdfReader reader;
     private PdfReader reader2;
+    private PdfWriter writer;
+
+    public PdfWriter getWriter() {
+        return writer;
+    }
+
+    public void setWriter(PdfWriter writer) {
+        this.writer = writer;
+    }
     private UploadedFile file;
     private UploadedFile file2;
+    private int number;
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+    
     public UploadedFile getFile2() {
         return file2;
     }
@@ -72,6 +90,7 @@ public class PDF implements Serializable {
     }
     
     
+    
 //    PdfDocument pdfDoc = new PdfDocument(writer);
 
 //    public PDF() throws FileNotFoundException {
@@ -84,19 +103,38 @@ public class PDF implements Serializable {
         this.toInputStream();
         PdfDocument doc = new PdfDocument(this.getReader());
         PdfDocument doc2 = new PdfDocument(this.getReader2());
-        PdfDocument docFinal = null;
-        List<PdfPage> listPage;
-        listPage = doc.copyPagesTo(1, doc.getNumberOfPages(), doc2);
-        for(PdfPage page : listPage){
-		docFinal.addPage(page);
-	}
+                
+        PdfWriter writer = new PdfWriter(DEST);
+        PdfDocument pdfFinal = new PdfDocument(writer);
+        
+        doc.copyPagesTo(1, doc.getNumberOfPages(), pdfFinal);
+        doc2.copyPagesTo(1, doc2.getNumberOfPages(), pdfFinal);
+        pdfFinal.close();
+        
+        //docFinal.copyPagesTo(1, doc.getNumberOfPages(), doc);
+        //docFinal.copyPagesTo(1, doc2.getNumberOfPages(), doc2);
+        
+//        List<PdfPage> listPage;
+//        listPage = doc.copyPagesTo(1, doc.getNumberOfPages(), doc2);
+//        for(PdfPage page : listPage){
+//		docFinal.addPage(page);
+//	}
+        
+        
+        
         //return  docFinal;
     }
 
-    public void deletePage(File pdf1, int page) {
+    public void deletePage() throws FileNotFoundException {
+        
+        PdfWriter writer = new PdfWriter(DEST);
+        PdfDocument pdfFinal = new PdfDocument(writer);
+        
         PdfDocument doc = new PdfDocument(this.getReader());
-        doc.removePage(page);
-
+        doc.removePage(this.getNumber());
+        
+        pdfFinal = doc;
+        pdfFinal.close();
         //return doc
     }
 
