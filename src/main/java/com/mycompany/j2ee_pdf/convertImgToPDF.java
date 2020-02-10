@@ -59,6 +59,7 @@ public class convertImgToPDF implements Serializable {
         // Closing the document       
         document.close();
 
+        System.out.println("Image added");
         
     }
 
