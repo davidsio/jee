@@ -29,16 +29,17 @@
                             <h:form enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="inputFile1">PDF : </label>
-                                    <p:fileUpload value="#{fileUploadView.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                    <p:fileUpload value="#{PDF.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
                                 <div class="form-group">
                                     <label for="number">Numéro de la page : </label>
                                     <br />
-                                    <p:inputNumber type="number" id="number" value='' required='' minValue="0" ></p:inputNumber>
+                                    <!-- <p:inputNumber type="number" id="number" value="#{PDF.number}" required='' minValue="0" ></p:inputNumber> -->
+                                    <p:inputText type="text" id="number" value="#{PDF.number}" required=''></p:inputText>
                                 </div>
                                 <br />
-                                <p:commandButton value="Extraire" class="btn btn-success" ajax="false" action="#{fileUploadView.upload}" disabled="false" />
+                                <p:commandButton value="Extraire" class="btn btn-success" ajax="false" action="#{PDF.deletePage}" disabled="false" />
 
                             </h:form>
                         </div>

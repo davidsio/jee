@@ -91,12 +91,6 @@ public class PDF implements Serializable {
     
     
     
-//    PdfDocument pdfDoc = new PdfDocument(writer);
-
-//    public PDF() throws FileNotFoundException {
-//        this.writer = new PdfWriter(dest);
-//    }
-    
     
     public void merge() throws IOException, Exception {
 
@@ -110,32 +104,21 @@ public class PDF implements Serializable {
         doc.copyPagesTo(1, doc.getNumberOfPages(), pdfFinal);
         doc2.copyPagesTo(1, doc2.getNumberOfPages(), pdfFinal);
         pdfFinal.close();
-        
-        //docFinal.copyPagesTo(1, doc.getNumberOfPages(), doc);
-        //docFinal.copyPagesTo(1, doc2.getNumberOfPages(), doc2);
-        
-//        List<PdfPage> listPage;
-//        listPage = doc.copyPagesTo(1, doc.getNumberOfPages(), doc2);
-//        for(PdfPage page : listPage){
-//		docFinal.addPage(page);
-//	}
-        
-        
-        
-        //return  docFinal;
+       
     }
 
-    public void deletePage() throws FileNotFoundException {
+    public void deletePage() throws FileNotFoundException, IOException {
         
+        this.toInputStreamSolo();
         PdfWriter writer = new PdfWriter(DEST);
         PdfDocument pdfFinal = new PdfDocument(writer);
         
         PdfDocument doc = new PdfDocument(this.getReader());
-        doc.removePage(this.getNumber());
-        
-        pdfFinal = doc;
+        //doc.removePage(this.getNumber());       
+        doc.copyPagesTo(1, doc.getNumberOfPages(), pdfFinal);
+        pdfFinal.removePage(this.getNumber()); 
+    
         pdfFinal.close();
-        //return doc
     }
 
     public void extractPage(File pdf1, int page) {
@@ -155,14 +138,6 @@ public class PDF implements Serializable {
 //        document.close();
     }
 
-    public void convertToPDF(File png) {
-//        Document document = new Document(A4, 20, 20, 20, 20);
-//        PdfWriter.getInstance(document, new FileOutputStream("C:/test.pdf"));
-//        document.open();
-//        Image image = Image.getInstance(getClass().getResource("/logo.png"));
-//        document.add(image);
-//        document.close();
-    }
 
     //Trier oui mais comment ?
     public void triHaie(File php) {
@@ -182,6 +157,13 @@ public class PDF implements Serializable {
         this.setReader(a);
         this.setReader2(b);
     }
+    
+    public void toInputStreamSolo() throws IOException {
+        InputStream input = this.file.getInputstream(); 
+        PdfReader a = new PdfReader(input);
+        this.setReader(a);
+    }
+    
     public void upload() throws IOException, Exception {
         if (file != null) {
             FacesMessage message = new FacesMessage("Successful", file.getFileName() + " is uploaded.");
