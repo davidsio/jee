@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <head> 
+        <title>JEE is dead</title>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous"></link>
+    </head>
+    <h:body>
+        <div class="container">
+
+            <div class="row">
+                <div class="text-center col-12">
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="text-center col-12">
+                            <h1>Fusion de PDF</h1>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class='row'>
+                        <div class='offset-4 col-4'>
+                            <h:form enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="inputFile1">PDF 1</label>
+                                    <p:fileUpload value="#{PDF.reader}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label for="inputFile2">PDF 2</label>
+                                    <p:fileUpload value="#{PDF.reader2}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                </div>
+                                <br />
+                                <button type="submit" action='#{PDF.merge}' class="btn btn-success">Fusionner</button>
+
+                            </h:form>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    </h:body>
+</html>
