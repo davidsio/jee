@@ -80,9 +80,7 @@ public class PDF implements Serializable {
     
     
     public void merge() throws IOException, Exception {
-        //PdfReader reader = new PdfReader(file);
-        //PdfReader reader2 = new PdfReader(file2);
-        //this.upload();
+
         this.toInputStream();
         PdfDocument doc = new PdfDocument(this.getReader());
         PdfDocument doc2 = new PdfDocument(this.getReader2());
