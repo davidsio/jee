@@ -9,21 +9,27 @@ import com.itextpdf.kernel.pdf.*;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import javax.inject.Named;
+import javax.enterprise.context.*;
 /**
  *
  * @author Hp
  */
-public class PDF {
+
+@Named
+@SessionScoped
+public class PDF implements Serializable{
 
     String dest = "C:/Users/Hp/Documents/TP_PDF/test.pdf";
-    PdfWriter writer;
+//    PdfWriter writer;
     private PdfReader reader;
     private PdfReader reader2;
-    PdfDocument pdfDoc = new PdfDocument(writer);
+//    PdfDocument pdfDoc = new PdfDocument(writer);
 
-    public PDF() throws FileNotFoundException {
-        this.writer = new PdfWriter(dest);
-    }
+//    public PDF() throws FileNotFoundException {
+//        this.writer = new PdfWriter(dest);
+//    }
 
     public void merge() throws IOException {
         //PdfReader reader = new PdfReader(pdf1);

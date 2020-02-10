@@ -33,16 +33,16 @@ and open the template in the editor.
                         <div class='offset-4 col-4'>
                             <h:form enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="inputFile1">PDF 1</label>
-                                    <p:fileUpload value="#{fileUploadView.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                    <label for="inputFile1">PDF 1 </label>
+                                    <p:fileUpload value="#{PDF.reader}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
                                 <div class="form-group">
-                                    <label for="inputFile2">PDF 2</label>
-                                    <p:fileUpload value="#{fileUploadView.file}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
+                                    <label for="inputFile2">PDF 2 </label>
+                                    <p:fileUpload value="#{pdf.reader2}" mode="simple" required='' accept="application/pdf"></p:fileUpload>
                                 </div>
                                 <br />
-                                <button type="submit" class="btn btn-success">Fusionner</button>
+                                <button type="submit" action="#{PDF.merge}" class="btn btn-success">Fusionner</button>
 
                             </h:form>
                         </div>
