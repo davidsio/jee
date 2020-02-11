@@ -19,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -27,13 +28,14 @@ import org.primefaces.model.UploadedFile;
  *
  * @author Hp
  */
-
 @Named
 @SessionScoped
 public class PDF implements Serializable {
 
-    String DEST = "C:\\Users\\Hp\\Documents\\NetBeansProjects\\J2EE_PDF\\src\\main\\webapp\\ressources\\uploads\\monpdf.pdf";
- 
+    // mac : /Users/davidnadal/Documents/epsi/jee/src/main/webapp/ressources/uploads/monpdf.pdf
+    // windows : C:\\Users\\Hp\\Documents\\NetBeansProjects\\J2EE_PDF\\src\\main\\webapp\\ressources\\uploads\\monpdf.pdf
+    String DEST = "/Users/davidnadal/Documents/epsi/jee/src/main/webapp/ressources/uploads/monpdf.pdf";
+
     private PdfReader reader;
     private PdfReader reader2;
     private PdfWriter writer;
@@ -56,7 +58,7 @@ public class PDF implements Serializable {
     public void setNumber(int number) {
         this.number = number;
     }
-    
+
     public UploadedFile getFile2() {
         return file2;
     }
@@ -88,42 +90,54 @@ public class PDF implements Serializable {
     public void setReader2(PdfReader reader2) {
         this.reader2 = reader2;
     }
-    
-    
-    
-    
+
     public void merge() throws IOException, Exception {
 
         this.toInputStream();
         PdfDocument doc = new PdfDocument(this.getReader());
         PdfDocument doc2 = new PdfDocument(this.getReader2());
-                
+
         PdfWriter writer = new PdfWriter(DEST);
         PdfDocument pdfFinal = new PdfDocument(writer);
-        
+
         doc.copyPagesTo(1, doc.getNumberOfPages(), pdfFinal);
         doc2.copyPagesTo(1, doc2.getNumberOfPages(), pdfFinal);
         pdfFinal.close();
-       
+
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/success.html");
+
     }
 
     public void deletePage() throws FileNotFoundException, IOException {
-        
+
         this.toInputStreamSolo();
         PdfWriter writer = new PdfWriter(DEST);
         PdfDocument pdfFinal = new PdfDocument(writer);
-        
+
         PdfDocument doc = new PdfDocument(this.getReader());
         //doc.removePage(this.getNumber());       
         doc.copyPagesTo(1, doc.getNumberOfPages(), pdfFinal);
-        pdfFinal.removePage(this.getNumber()); 
-    
+        pdfFinal.removePage(this.getNumber());
+
         pdfFinal.close();
+
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/success.html");
     }
 
-    public void extractPage(File pdf1, int page) {
+     public void extractPage() throws IOException {
+        this.toInputStreamSolo();
+        PdfWriter writer = new PdfWriter(DEST);
+        PdfDocument pdfFinal = new PdfDocument(writer);
+   
         PdfDocument doc = new PdfDocument(this.getReader());
-        //return doc.getPage(page);
+        doc.copyPagesTo(this.getNumber(), this.getNumber(), pdfFinal);
+       
+     
+        pdfFinal.close();
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/success.html");
     }
 
     public void convertToPNG(File pdf) {
@@ -138,7 +152,6 @@ public class PDF implements Serializable {
 //        document.close();
     }
 
-
     //Trier oui mais comment ?
     public void triHaie(File php) {
 
@@ -151,19 +164,19 @@ public class PDF implements Serializable {
 
     public void toInputStream() throws IOException {
         InputStream input = this.file.getInputstream();
-        InputStream input2 = this.file2.getInputstream();  
+        InputStream input2 = this.file2.getInputstream();
         PdfReader a = new PdfReader(input);
         PdfReader b = new PdfReader(input2);
         this.setReader(a);
         this.setReader2(b);
     }
-    
+
     public void toInputStreamSolo() throws IOException {
-        InputStream input = this.file.getInputstream(); 
+        InputStream input = this.file.getInputstream();
         PdfReader a = new PdfReader(input);
         this.setReader(a);
     }
-    
+
     public void upload() throws IOException, Exception {
         if (file != null) {
             FacesMessage message = new FacesMessage("Successful", file.getFileName() + " is uploaded.");

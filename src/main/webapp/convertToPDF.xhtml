@@ -34,10 +34,10 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="inputFile1">PDF</label>
                                     <br />
-                                    <p:fileUpload value="#{convertImgToPDF.j2eedesesmorts}" mode="simple" required='' accept="image/x-png,image/gif,image/jpeg"></p:fileUpload>
+                                    <p:fileUpload value="#{convertImgToPDF.pdfFile}" mode="simple" required='' accept="image/x-png,image/gif,image/jpeg"></p:fileUpload>
                                 </div>
                                 <br />
-                                <p:commandButton value="Convertir" class="btn btn-success" ajax="false" action="#{convertImgToPDF.convert}" disabled="false" />
+                                <p:commandButton value="Convertir" class="btn btn-success" action="#{convertImgToPDF.convert}" />
 
                             </h:form>
                         </div>

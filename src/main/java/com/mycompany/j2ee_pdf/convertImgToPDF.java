@@ -13,9 +13,20 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -25,42 +36,59 @@ import org.primefaces.model.UploadedFile;
 @Named
 @SessionScoped
 public class convertImgToPDF implements Serializable {
-    UploadedFile j2eedesesmorts;
+    UploadedFile pdfFile;
 
-    public UploadedFile getJ2eedesesmorts() {
-        return j2eedesesmorts;
+    public UploadedFile getPdfFile() {
+        return pdfFile;
     }
 
-    public void setJ2eedesesmorts(UploadedFile j2eedesesmorts) {
-        this.j2eedesesmorts = j2eedesesmorts;
+    public void setPdfFile(UploadedFile pdfFile) {
+        this.pdfFile = pdfFile;
     }
-    public void convert() throws Exception {
+    
+    public void convert() {
 
-        // Creating a PdfWriter    
-        String dest = "/Users/davidnadal/Documents/epsi/jee/src/main/webapp/ressources/uploads/monpdf.pdf";
-        PdfWriter writer = new PdfWriter(dest);
-
-        // Creating a PdfDocument       
-        PdfDocument pdf = new PdfDocument(writer);
-
-        // Creating a Document        
-        Document document = new Document(pdf);
-
-        // Creating an ImageData object       
-        String imFile = "/Users/davidnadal/Downloads/" + this.j2eedesesmorts.getFileName();
-        ImageData data = ImageDataFactory.create(imFile);
-
-        // Creating an Image object        
-        Image image = new Image(data);
-
-        // Adding image to the document       
-        document.add(image);
-
-        // Closing the document       
-        document.close();
-
-        System.out.println("Image added");
-        
+        PdfWriter writer = null;
+        try {
+            // Creating a PdfWriter
+            String dest = "/Users/davidnadal/Documents/epsi/jee/src/main/webapp/ressources/uploads/monpdf.pdf";
+            writer = new PdfWriter(dest);
+            // Creating a PdfDocument
+            PdfDocument pdf = new PdfDocument(writer);
+            // Creating a Document
+            Document document = new Document(pdf);
+            // Creating an ImageData object
+            String imFile = "/Users/davidnadal/Downloads/" + this.pdfFile.getFileName();
+            ImageData data = null;
+            try {
+                data = ImageDataFactory.create(imFile);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(convertImgToPDF.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // Creating an Image object
+            Image image = new Image(data);
+            // Adding image to the document
+            document.add(image);
+            // Closing the document
+            document.close();
+            System.out.println("Image added");
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(convertImgToPDF.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(convertImgToPDF.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            try {
+                ec.redirect(ec.getRequestContextPath()+ "/success.html");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
     }
 
 }
